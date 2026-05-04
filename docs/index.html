@@ -5,160 +5,174 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Monopolia — RL Research Paper</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1a1a1a;
-    --ink-light: #444;
-    --ink-faint: #888;
-    --rule: #ccc;
-    --page: #faf8f4;
-    --accent: #b5372a;
-    --accent2: #2a5b8f;
-    --accent3: #2a7a45;
-    --accent4: #7a5a2a;
-    --s1: #e05c4a;
-    --s2: #3a7fbf;
-    --s3: #3aaa65;
-    --s4: #c47a30;
-    --col: 680px;
+    --bg-color: #f4f4f5;
+    --paper-bg: #ffffff;
+    --text-main: #27272a;
+    --text-light: #52525b;
+    --text-faint: #a1a1aa;
+    --border: #e4e4e7;
+    --accent: #4f46e5;      /* Modern Indigo */
+    --accent-hover: #4338ca;
+    --abstract-bg: #e0e7ff;
+
+    /* Stage Colors */
+    --s1: #ef4444; --s1-bg: #fee2e2;
+    --s2: #3b82f6; --s2-bg: #dbeafe;
+    --s3: #10b981; --s3-bg: #d1fae5;
+    --s4: #f59e0b; --s4-bg: #fef3c7;
+
+    --win: #10b981;
+    --trunc: #f59e0b;
+    --loss: #ef4444;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #e8e4dc;
-    font-family: 'EB Garamond', Georgia, serif;
-    color: var(--ink);
-    font-size: 17px;
+    background: var(--bg-color);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text-main);
+    font-size: 16px;
     line-height: 1.7;
-    padding: 48px 24px 80px;
+    padding: 60px 20px;
+    -webkit-font-smoothing: antialiased;
   }
 
   .paper {
-    max-width: 780px;
+    max-width: 860px;
     margin: 0 auto;
-    background: var(--page);
-    padding: 72px 80px;
-    box-shadow: 0 4px 40px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.1);
+    background: var(--paper-bg);
+    padding: 64px 80px;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01);
     position: relative;
-  }
-
-  .paper::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--accent) 100%);
+    border: 1px solid rgba(0,0,0,0.05);
   }
 
   /* ---- Header ---- */
-  .paper-title {
-    font-family: 'Spectral', serif;
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 1.25;
+  .header-content {
     text-align: center;
-    margin-bottom: 6px;
-    letter-spacing: -0.3px;
+    margin-bottom: 40px;
+  }
+
+  .logo {
+    display: block;
+    margin: 0 auto 24px auto;
+    width: 140px;
+    height: auto;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+  }
+
+  .paper-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #18181b;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
   }
 
   .paper-subtitle {
-    text-align: center;
-    font-style: italic;
-    color: var(--ink-light);
-    font-size: 16px;
-    margin-bottom: 28px;
+    font-size: 18px;
+    color: var(--text-light);
+    margin-bottom: 32px;
+    font-weight: 400;
   }
 
   .authors {
-    text-align: center;
-    font-size: 15px;
-    margin-bottom: 6px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
   }
 
   .affiliation {
-    text-align: center;
-    font-size: 13px;
-    color: var(--ink-faint);
-    margin-bottom: 36px;
-    font-style: italic;
+    font-size: 14px;
+    color: var(--text-faint);
   }
 
   .header-rule {
     border: none;
-    border-top: 1px solid var(--ink);
-    margin: 0 0 12px;
-  }
-  .header-rule-thin {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 0 0 36px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 40px 0;
   }
 
   /* ---- Abstract ---- */
   .abstract-box {
-    border-left: 3px solid var(--accent);
-    padding: 16px 20px 16px 20px;
-    margin-bottom: 48px;
-    background: rgba(181,55,42,0.04);
+    background: var(--abstract-bg);
+    border-radius: 12px;
+    padding: 24px 32px;
+    margin-bottom: 56px;
+    border-left: 4px solid var(--accent);
   }
 
   .abstract-box strong {
-    font-family: 'Spectral', serif;
-    font-size: 13px;
-    letter-spacing: 1.5px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     display: block;
-    margin-bottom: 8px;
-    color: var(--accent);
+    margin-bottom: 12px;
+    color: var(--accent-hover);
   }
 
   .abstract-box p {
-    font-size: 15.5px;
-    line-height: 1.65;
-    color: var(--ink-light);
+    font-size: 15px;
+    line-height: 1.7;
+    color: #3730a3;
+    margin: 0;
   }
 
   /* ---- Sections ---- */
   h2 {
-    font-family: 'Spectral', serif;
-    font-size: 19px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
     font-weight: 600;
-    margin: 48px 0 14px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--rule);
-    letter-spacing: 0.2px;
-    color: var(--ink);
+    margin: 56px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    color: #18181b;
+    display: flex;
+    align-items: center;
   }
 
   h2 .sec-num {
-    color: var(--accent);
-    margin-right: 8px;
-    font-weight: 400;
+    background: var(--bg-color);
+    color: var(--text-light);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 16px;
+    margin-right: 12px;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   h3 {
-    font-family: 'Spectral', serif;
-    font-size: 16.5px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
     font-weight: 600;
-    margin: 28px 0 10px;
-    font-style: italic;
+    margin: 32px 0 16px;
+    color: #27272a;
   }
 
   p {
-    margin-bottom: 14px;
-    text-align: justify;
-    hyphens: auto;
+    margin-bottom: 18px;
+    color: var(--text-light);
   }
 
   /* ---- Figures ---- */
   .figure {
-    margin: 36px 0;
-    border: 1px solid var(--rule);
-    padding: 24px 20px 16px;
-    background: white;
+    margin: 40px 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    background: #fafafa;
   }
 
   .figure canvas {
@@ -166,23 +180,23 @@
   }
 
   .fig-caption {
-    margin-top: 12px;
-    font-size: 13.5px;
-    color: var(--ink-light);
-    line-height: 1.5;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.6;
     text-align: center;
   }
 
   .fig-caption strong {
-    font-style: italic;
-    color: var(--ink);
+    color: var(--text-main);
+    font-weight: 600;
   }
 
   .fig-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 36px 0;
+    gap: 24px;
+    margin: 40px 0;
   }
 
   .fig-grid .figure {
@@ -191,134 +205,172 @@
 
   /* ---- Tables ---- */
   .tbl-wrap {
-    margin: 28px 0;
+    margin: 32px 0;
     overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14.5px;
-    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    background: white;
   }
 
   thead tr {
-    border-bottom: 1.5px solid var(--ink);
+    background: var(--bg-color);
+    border-bottom: 2px solid var(--border);
   }
 
   thead th {
-    padding: 8px 12px;
+    padding: 12px 16px;
     text-align: left;
     font-weight: 600;
-    font-family: 'Spectral', serif;
-    font-size: 13px;
-    letter-spacing: 0.4px;
-    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 12px;
   }
 
   tbody tr {
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.2s ease;
+  }
+
+  tbody tr:hover {
+    background: #fafafa;
   }
 
   tbody tr:last-child {
-    border-bottom: 1.5px solid var(--ink);
+    border-bottom: none;
   }
 
   tbody td {
-    padding: 7px 12px;
-    color: var(--ink-light);
+    padding: 12px 16px;
+    color: var(--text-light);
   }
 
-  tbody td:first-child { color: var(--ink); font-weight: 500; }
+  tbody td:first-child {
+    color: var(--text-main);
+    font-weight: 500;
+  }
 
   .tbl-caption {
-    font-size: 13.5px;
-    color: var(--ink-light);
-    margin-top: 8px;
+    font-size: 14px;
+    color: var(--text-light);
+    margin-top: 12px;
     text-align: center;
   }
 
-  .win { color: var(--accent3); font-weight: 600; }
-  .trunc { color: var(--accent4); }
-  .loss { color: var(--accent); }
+  .win { color: var(--win); font-weight: 600; }
+  .trunc { color: var(--trunc); font-weight: 600; }
+  .loss { color: var(--loss); font-weight: 600; }
 
   /* ---- Code / Mono ---- */
   code {
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
-    background: rgba(0,0,0,0.05);
-    padding: 1px 5px;
-    border-radius: 2px;
-    color: var(--accent2);
+    background: var(--bg-color);
+    padding: 4px 6px;
+    border-radius: 6px;
+    color: var(--accent);
+    border: 1px solid var(--border);
   }
 
   /* ---- Inline highlights ---- */
   .callout {
     display: flex;
     gap: 16px;
-    margin: 24px 0;
-    padding: 16px 18px;
-    background: rgba(42,91,143,0.05);
-    border-left: 3px solid var(--accent2);
-    font-size: 15px;
+    margin: 32px 0;
+    padding: 20px 24px;
+    background: #fffbeb;
+    border-radius: 12px;
+    border: 1px solid #fde68a;
+    align-items: flex-start;
   }
 
-  .callout-icon { font-size: 20px; flex-shrink: 0; }
+  .callout-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .callout p {
+    margin: 0;
+    color: #92400e;
+    font-size: 15px;
+  }
 
   /* ---- Stage pills ---- */
   .pill {
     display: inline-block;
-    padding: 1px 8px;
-    border-radius: 2px;
-    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
     font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.5px;
   }
-  .p1 { background: rgba(224,92,74,0.12); color: var(--s1); }
-  .p2 { background: rgba(58,127,191,0.12); color: var(--s2); }
-  .p3 { background: rgba(58,170,101,0.12); color: var(--s3); }
-  .p4 { background: rgba(196,122,48,0.12); color: var(--s4); }
+  .p1 { background: var(--s1-bg); color: var(--s1); }
+  .p2 { background: var(--s2-bg); color: var(--s2); }
+  .p3 { background: var(--s3-bg); color: var(--s3); }
+  .p4 { background: var(--s4-bg); color: var(--s4); }
 
   /* ---- Footer ---- */
-  .footer-rule { border: none; border-top: 1px solid var(--ink); margin: 56px 0 16px; }
-  .footer { font-size: 13px; color: var(--ink-faint); }
+  .footer-rule {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 64px 0 24px;
+  }
+
+  .footer {
+    font-size: 14px;
+    color: var(--text-faint);
+    text-align: center;
+  }
 
   /* ---- Chart legend override ---- */
   .chart-title {
-    font-family: 'Spectral', serif;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: var(--ink-faint);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
 
-  @media (max-width: 640px) {
-    .paper { padding: 40px 28px; }
+  @media (max-width: 768px) {
+    .paper { padding: 40px 32px; }
     .fig-grid { grid-template-columns: 1fr; }
+    h2 { font-size: 20px; }
   }
 </style>
 </head>
 <body>
 <div class="paper">
 
-  <p class="paper-title">Monopolia: Training a Curriculum Reinforcement Learning Agent<br>on a Complete Monopoly Game Engine</p>
-  <p class="paper-subtitle">Training dynamics, failure modes, and architectural fixes in a long-horizon stochastic board game</p>
+  <div class="header-content">
+    <!-- Inserted Logo -->
+    <img src="monopolia_logo.png" alt="Monopolia Python Logo" class="logo">
 
-  <p class="authors">Independent Research — Monopolia Project</p>
-  <p class="affiliation">v1 Training Run · 18,000,000 total steps · MaskablePPO + Curriculum Learning</p>
+    <p class="paper-title">Monopolia: Training a Curriculum Reinforcement Learning Agent<br>on a Complete Monopoly Game Engine</p>
+    <p class="paper-subtitle">Training dynamics, failure modes, and architectural fixes in a long-horizon stochastic board game</p>
+    <p class="authors">Independent Research — Monopolia Project</p>
+    <p class="affiliation">v1 Training Run · 18,000,000 total steps · MaskablePPO + Curriculum Learning</p>
+  </div>
 
   <hr class="header-rule">
-  <hr class="header-rule-thin">
 
   <div class="abstract-box">
     <strong>Abstract</strong>
-    <p>We present Monopolia, a complete Monopoly game engine paired with a reinforcement learning agent trained via MaskablePPO under a four-stage difficulty curriculum. The agent operates on a 95-dimensional observation space and a 46-action discrete space, with invalid actions masked at every step. Our first training run (v1, 18M total steps) revealed three critical failure modes: a degenerate policy in Stage 1 (100% win rate, ~85-step episodes) caused by trivially weak opponents; near-total truncation rates in Stages 2–4 (56–60%) caused by discount invisibility at high episode lengths; and insufficient step budgets for Stages 3–4 which had not yet converged. We diagnose these failures quantitatively and propose six architectural and training fixes constituting the v2 pipeline.</p>
+    <p>I present Monopolia, a complete Monopoly game engine paired with a reinforcement learning agent trained via MaskablePPO under a four-stage difficulty curriculum. The agent operates on a 95-dimensional observation space and a 46-action discrete space, with invalid actions masked at every step. My first training run (v1, 18M total steps) revealed three critical failure modes: a degenerate policy in Stage 1 (100% win rate, ~85-step episodes) caused by trivially weak opponents; near-total truncation rates in Stages 2–4 (56–60%) caused by discount invisibility at high episode lengths; and insufficient step budgets for Stages 3–4, which had not yet converged. I quantitatively diagnose these failures and propose six architectural and training fixes constituting the v2 pipeline.</p>
   </div>
 
   <!-- ===== 1. INTRODUCTION ===== -->
-  <h2><span class="sec-num">1.</span>Introduction</h2>
+  <h2><span class="sec-num">01</span>Introduction</h2>
 
   <p>Monopoly is a canonical example of a long-horizon, high-variance, multi-agent board game. It combines stochastic elements (dice rolls, card draws) with strategic decisions (property acquisition, development, trading, debt management) spread across hundreds of turns. These properties make it a challenging but meaningful benchmark for reinforcement learning: the win signal is sparse, the game length is unbounded, and a naive agent must learn to convert early resource accumulation into a late-game victory condition.</p>
 
@@ -327,7 +379,7 @@
   <p>This paper documents the v1 training run in full, presents the observed training dynamics and evaluation results, diagnoses the failure modes quantitatively, and describes the v2 fixes that will be applied in the next training cycle.</p>
 
   <!-- ===== 2. ENVIRONMENT ===== -->
-  <h2><span class="sec-num">2.</span>Environment Design</h2>
+  <h2><span class="sec-num">02</span>Environment Design</h2>
 
   <h3>2.1 Observation Space</h3>
   <p>The agent receives a 95-dimensional float vector, all values normalised to <code>[0, 1]</code>:</p>
@@ -348,8 +400,8 @@
       <tr><td>92–94</td><td>Each opponent has ≥1 monopoly</td><td>Binary</td></tr>
     </tbody>
   </table>
-  <p class="tbl-caption"><strong>Table 1.</strong> Observation vector composition. All values lie in [0, 1].</p>
   </div>
+  <p class="tbl-caption"><strong>Table 1.</strong> Observation vector composition. All values lie in [0, 1].</p>
 
   <h3>2.2 Action Space</h3>
   <p>The agent selects from 46 discrete actions. Invalid actions are masked to zero probability at every step via <code>MaskablePPO</code>, so the policy never wastes gradient on illegal moves.</p>
@@ -365,8 +417,8 @@
       <tr><td>45</td><td>Propose smart trade macro (find missing monopoly piece)</td><td>WAITING_FOR_ROLL</td></tr>
     </tbody>
   </table>
-  <p class="tbl-caption"><strong>Table 2.</strong> Action space. Actions 5–44 map directly to board slots.</p>
   </div>
+  <p class="tbl-caption"><strong>Table 2.</strong> Action space. Actions 5–44 map directly to board slots.</p>
 
   <h3>2.3 Reward Function</h3>
   <p>The reward at each step is a sum of four components:</p>
@@ -382,11 +434,11 @@
       <tr><td>Terminal (loss)</td><td>−1000</td><td>Eliminated by bankruptcy</td></tr>
     </tbody>
   </table>
-  <p class="tbl-caption"><strong>Table 3.</strong> Reward function components.</p>
   </div>
+  <p class="tbl-caption"><strong>Table 3.</strong> Reward function components.</p>
 
   <!-- ===== 3. TRAINING ===== -->
-  <h2><span class="sec-num">3.</span>Training Methodology</h2>
+  <h2><span class="sec-num">03</span>Training Methodology</h2>
 
   <p>Training uses a four-stage curriculum implemented with MaskablePPO (<code>sb3-contrib</code>) and 8 parallel environments via <code>make_vec_env</code>. Each stage warms-starts from the previous model's weights with a reduced learning rate (<code>1e-4</code>) and entropy coefficient (<code>0.005</code>) to prevent catastrophic forgetting while still adapting to the harder opponent pool.</p>
 
@@ -394,19 +446,19 @@
   <table>
     <thead><tr><th>Stage</th><th>Opponent Pool</th><th>Total Steps (v1)</th><th>γ (v2)</th></tr></thead>
     <tbody>
-      <tr><td><span class="pill p1">Stage 1 — Easy</span></td><td>3× Difficulty 1 bots</td><td>3,000,000</td><td>0.990</td></tr>
-      <tr><td><span class="pill p2">Stage 2 — Medium</span></td><td>2× Diff 2 + 1× Diff 1</td><td>4,000,000</td><td>0.995</td></tr>
-      <tr><td><span class="pill p3">Stage 3 — Hard</span></td><td>2× Diff 3 + 1× Diff 2</td><td>5,000,000</td><td>0.997</td></tr>
-      <tr><td><span class="pill p4">Stage 4 — Expert</span></td><td>2× Diff 4 + 1× Diff 3</td><td>6,000,000</td><td>0.997</td></tr>
+      <tr><td><span class="pill p1">S1 — Easy</span></td><td>3× Difficulty 1 bots</td><td>3,000,000</td><td>0.990</td></tr>
+      <tr><td><span class="pill p2">S2 — Medium</span></td><td>2× Diff 2 + 1× Diff 1</td><td>4,000,000</td><td>0.995</td></tr>
+      <tr><td><span class="pill p3">S3 — Hard</span></td><td>2× Diff 3 + 1× Diff 2</td><td>5,000,000</td><td>0.997</td></tr>
+      <tr><td><span class="pill p4">S4 — Expert</span></td><td>2× Diff 4 + 1× Diff 3</td><td>6,000,000</td><td>0.997</td></tr>
     </tbody>
   </table>
-  <p class="tbl-caption"><strong>Table 4.</strong> Curriculum stages. v1 used γ=0.99 throughout; v2 uses staged gamma.</p>
   </div>
+  <p class="tbl-caption"><strong>Table 4.</strong> Curriculum stages. v1 used γ=0.99 throughout; v2 uses staged gamma.</p>
 
   <p>Core PPO hyperparameters: <code>n_steps=4096</code>, <code>batch_size=512</code>, <code>n_epochs=10</code>, <code>ent_coef=0.01</code>, <code>clip_range=0.2</code>, <code>max_grad_norm=0.5</code>, <code>gae_lambda=0.95</code>. The rollout buffer accumulates 4096 × 8 = 32,768 environment steps per gradient update, providing stable gradient estimates for this long-horizon game.</p>
 
   <!-- ===== 4. RESULTS ===== -->
-  <h2><span class="sec-num">4.</span>Results — v1 Training Run</h2>
+  <h2><span class="sec-num">04</span>Results — v1 Training Run</h2>
 
   <h3>4.1 Training Curves — Mean Episode Reward</h3>
 
@@ -503,17 +555,17 @@
       </tr>
     </tbody>
   </table>
-  <p class="tbl-caption"><strong>Table 5.</strong> Evaluation results. Win rate = (Clean Wins + Truncated Wins) / 50.</p>
   </div>
+  <p class="tbl-caption"><strong>Table 5.</strong> Evaluation results. Win rate = (Clean Wins + Truncated Wins) / 50.</p>
 
   <!-- ===== 5. ANALYSIS ===== -->
-  <h2><span class="sec-num">5.</span>Failure Mode Analysis</h2>
+  <h2><span class="sec-num">05</span>Failure Mode Analysis</h2>
 
   <h3>5.1 Stage 1 — Degenerate Policy</h3>
   <p>The flat reward plateau at ~+1,080 from 400k steps onward and the collapse of mean episode length to approximately 85 steps are unambiguous signs of a degenerate policy. A competitive Monopoly game against three opponents requires several hundred turns at minimum; 85 steps is consistent with the agent exploiting the trivially weak Difficulty 1 field by purchasing every reachable property and rolling without strategic consideration. This policy achieves 100% evaluation win rate against the same weak opponents but transfers almost no useful strategy to Stage 2.</p>
 
   <div class="callout">
-    <span class="callout-icon">⚠</span>
+    <span class="callout-icon">💡</span>
     <p>The warm-start from Stage 1 to Stage 2 transferred a shallow "buy everything, roll immediately" policy. The immediate reward cliff from ~+1,080 to ~+435 at Stage 2 onset is a direct consequence — the agent's learned behaviour does not generalise.</p>
   </div>
 
@@ -526,7 +578,7 @@
   <p>Stage 3's reward curve at termination (5M steps, mean reward ~+131) shows an upward trend in the final 1M steps — the policy was still improving. Stage 4's peak reward of +162 at 5.2M steps followed by a decline to +49 at 6M steps suggests the policy found and then lost a local optimum, a common symptom of an under-trained warm-start combined with a too-aggressive learning rate during fine-tuning.</p>
 
   <!-- ===== 6. V2 FIXES ===== -->
-  <h2><span class="sec-num">6.</span>Proposed Fixes — v2 Pipeline</h2>
+  <h2><span class="sec-num">06</span>Proposed Fixes — v2 Pipeline</h2>
 
   <div class="tbl-wrap">
   <table>
@@ -540,39 +592,45 @@
       <tr><td>6</td><td><strong>Configurable <code>max_steps</code>:</strong> training uses 3,000 steps/episode; evaluation uses 7,500. Separates the forced-endgame budget from evaluation timeout.</td><td>Training efficiency</td></tr>
     </tbody>
   </table>
-  <p class="tbl-caption"><strong>Table 6.</strong> v2 fixes and the failure modes they address.</p>
   </div>
+  <p class="tbl-caption"><strong>Table 6.</strong> v2 fixes and the failure modes they address.</p>
 
   <!-- ===== 7. CONCLUSION ===== -->
-  <h2><span class="sec-num">7.</span>Conclusion</h2>
+  <h2><span class="sec-num">07</span>Conclusion</h2>
 
   <p>The v1 training run produced a model that wins trivially against weak opponents (Stage 1: 100%) but fails to generalise to competitive play (Stages 2–4: 30–42% combined win rate, dominated by truncated episodes). The failure modes are well-understood and addressable: opponent diversity prevents degenerate policies, forced endgame converts long games into useful terminal signal, staged discounting matches γ to actual episode length, and extended budgets allow convergence for harder stages.</p>
 
   <p>The v2 pipeline also introduces a full trading system — the final major missing mechanic — allowing the agent to negotiate directly for monopoly-completing properties via Action 45. This new degree of freedom, combined with the training fixes above, is expected to substantially improve the agent's strategic depth and win rates in the next training run. The target for public release of the RL codebase and trained models remains a Stage 2 combined win rate of 100%.</p>
 
   <hr class="footer-rule">
-  <p class="footer">Monopolia Project · v1 Training Report · MaskablePPO + Curriculum Learning · 18,000,000 total environment steps across 4 stages</p>
+  <p class="footer">Monopolia Project · v1 Training Report · MaskablePPO + Curriculum Learning<br>18,000,000 total environment steps across 4 stages</p>
 </div>
 
 <script>
 const COLORS = {
-  s1: '#e05c4a', s2: '#3a7fbf', s3: '#3aaa65', s4: '#c47a30',
-  s1a: 'rgba(224,92,74,0.12)', s2a: 'rgba(58,127,191,0.12)',
-  s3a: 'rgba(58,170,101,0.12)', s4a: 'rgba(196,122,48,0.12)',
+  s1: '#ef4444', s2: '#3b82f6', s3: '#10b981', s4: '#f59e0b',
+  s1a: 'rgba(239, 68, 68, 0.1)', s2a: 'rgba(59, 130, 246, 0.1)',
+  s3a: 'rgba(16, 185, 129, 0.1)', s4a: 'rgba(245, 158, 11, 0.1)',
 };
 
-const GRID = { color: 'rgba(0,0,0,0.06)' };
-const TICK = { color: '#888', font: { family: 'JetBrains Mono', size: 11 } };
+const GRID = { color: 'rgba(0,0,0,0.04)' };
+const TICK = { color: '#a1a1aa', font: { family: 'JetBrains Mono', size: 11 } };
 const baseOpts = {
   responsive: true,
   animation: { duration: 600 },
   plugins: {
-    legend: { labels: { font: { family: 'EB Garamond', size: 13 }, color: '#1a1a1a', boxWidth: 14 } },
-    tooltip: { titleFont: { family: 'JetBrains Mono', size: 12 }, bodyFont: { family: 'JetBrains Mono', size: 12 } }
+    legend: { labels: { font: { family: 'Inter', size: 13, weight: 500 }, color: '#27272a', boxWidth: 14, usePointStyle: true } },
+    tooltip: {
+      titleFont: { family: 'JetBrains Mono', size: 12 },
+      bodyFont: { family: 'JetBrains Mono', size: 12 },
+      backgroundColor: 'rgba(24, 24, 27, 0.9)',
+      padding: 12,
+      cornerRadius: 8
+    }
   },
   scales: {
-    x: { grid: GRID, ticks: TICK },
-    y: { grid: GRID, ticks: TICK }
+    x: { grid: GRID, ticks: TICK, border: {display: false} },
+    y: { grid: GRID, ticks: TICK, border: {display: false} }
   }
 };
 
@@ -598,21 +656,21 @@ new Chart(document.getElementById('chartAllRewards'), {
   type: 'line',
   data: {
     datasets: [
-      { label: 'Stage 1', data: s1Steps.map((x,i)=>({x,y:s1Reward[i]})), borderColor: COLORS.s1, backgroundColor: COLORS.s1a, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false },
-      { label: 'Stage 2', data: s2Steps.map((x,i)=>({x,y:s2Reward[i]})), borderColor: COLORS.s2, backgroundColor: COLORS.s2a, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false },
-      { label: 'Stage 3', data: s3Steps.map((x,i)=>({x,y:s3Reward[i]})), borderColor: COLORS.s3, backgroundColor: COLORS.s3a, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false },
-      { label: 'Stage 4', data: s4Steps.map((x,i)=>({x,y:s4Reward[i]})), borderColor: COLORS.s4, backgroundColor: COLORS.s4a, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false },
+      { label: 'Stage 1', data: s1Steps.map((x,i)=>({x,y:s1Reward[i]})), borderColor: COLORS.s1, backgroundColor: COLORS.s1a, borderWidth: 2, pointRadius: 2, tension: 0.4, fill: false },
+      { label: 'Stage 2', data: s2Steps.map((x,i)=>({x,y:s2Reward[i]})), borderColor: COLORS.s2, backgroundColor: COLORS.s2a, borderWidth: 2, pointRadius: 2, tension: 0.4, fill: false },
+      { label: 'Stage 3', data: s3Steps.map((x,i)=>({x,y:s3Reward[i]})), borderColor: COLORS.s3, backgroundColor: COLORS.s3a, borderWidth: 2, pointRadius: 2, tension: 0.4, fill: false },
+      { label: 'Stage 4', data: s4Steps.map((x,i)=>({x,y:s4Reward[i]})), borderColor: COLORS.s4, backgroundColor: COLORS.s4a, borderWidth: 2, pointRadius: 2, tension: 0.4, fill: false },
     ]
   },
-  options: { ...baseOpts, scales: { x: { type:'linear', title:{ display:true, text:'Steps (millions)', color:'#888', font:{size:12,family:'JetBrains Mono'} }, grid:GRID, ticks:TICK }, y: { title:{ display:true, text:'Mean Episode Reward', color:'#888', font:{size:12,family:'JetBrains Mono'} }, grid:GRID, ticks:TICK } } }
+  options: { ...baseOpts, scales: { x: { type:'linear', title:{ display:true, text:'Steps (millions)', color:'#a1a1aa', font:{size:12,family:'Inter'} }, grid:GRID, ticks:TICK }, y: { title:{ display:true, text:'Mean Episode Reward', color:'#a1a1aa', font:{size:12,family:'Inter'} }, grid:GRID, ticks:TICK } } }
 });
 
 // ---- Individual stage charts ----
 function stageChart(id, steps, rewards, color, colorA) {
   new Chart(document.getElementById(id), {
     type: 'line',
-    data: { datasets: [{ data: steps.map((x,i)=>({x,y:rewards[i]})), borderColor: color, backgroundColor: colorA, borderWidth: 2.5, pointRadius: 2.5, tension: 0.35, fill: true }] },
-    options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: baseOpts.plugins.tooltip }, scales: { x: { type:'linear', title:{ display:true, text:'Steps (M)', color:'#888', font:{size:11,family:'JetBrains Mono'} }, grid:GRID, ticks:TICK }, y: { title:{ display:true, text:'Reward', color:'#888', font:{size:11,family:'JetBrains Mono'} }, grid:GRID, ticks:TICK } } }
+    data: { datasets: [{ data: steps.map((x,i)=>({x,y:rewards[i]})), borderColor: color, backgroundColor: colorA, borderWidth: 2.5, pointRadius: 0, pointHitRadius: 10, tension: 0.4, fill: true }] },
+    options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: baseOpts.plugins.tooltip }, scales: { x: { type:'linear', title:{ display:true, text:'Steps (M)', color:'#a1a1aa', font:{size:11,family:'Inter'} }, grid:GRID, ticks:TICK }, y: { title:{ display:true, text:'Reward', color:'#a1a1aa', font:{size:11,family:'Inter'} }, grid:GRID, ticks:TICK } } }
   });
 }
 
@@ -626,34 +684,34 @@ new Chart(document.getElementById('chartEpLen'), {
   type: 'line',
   data: {
     datasets: [
-      { label: 'Stage 1', data: s1Steps.map((x,i)=>({x,y:s1Len[i]})), borderColor: COLORS.s1, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false },
-      { label: 'Stage 2', data: s2Steps.map((x,i)=>({x,y:s2Len[i]})), borderColor: COLORS.s2, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false },
-      { label: 'Stage 3', data: s3Steps.map((x,i)=>({x,y:s3Len[i]})), borderColor: COLORS.s3, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false },
-      { label: 'Stage 4', data: s4Steps.map((x,i)=>({x,y:s4Len[i]})), borderColor: COLORS.s4, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false },
+      { label: 'Stage 1', data: s1Steps.map((x,i)=>({x,y:s1Len[i]})), borderColor: COLORS.s1, borderWidth: 2, pointRadius: 2, tension: 0.4, fill: false },
+      { label: 'Stage 2', data: s2Steps.map((x,i)=>({x,y:s2Len[i]})), borderColor: COLORS.s2, borderWidth: 2, pointRadius: 2, tension: 0.4, fill: false },
+      { label: 'Stage 3', data: s3Steps.map((x,i)=>({x,y:s3Len[i]})), borderColor: COLORS.s3, borderWidth: 2, pointRadius: 2, tension: 0.4, fill: false },
+      { label: 'Stage 4', data: s4Steps.map((x,i)=>({x,y:s4Len[i]})), borderColor: COLORS.s4, borderWidth: 2, pointRadius: 2, tension: 0.4, fill: false },
     ]
   },
-  options: { ...baseOpts, scales: { x: { type:'linear', title:{ display:true, text:'Steps (millions)', color:'#888', font:{size:12,family:'JetBrains Mono'} }, grid:GRID, ticks:TICK }, y: { title:{ display:true, text:'Mean Episode Length (steps)', color:'#888', font:{size:12,family:'JetBrains Mono'} }, grid:GRID, ticks:TICK } } }
+  options: { ...baseOpts, scales: { x: { type:'linear', title:{ display:true, text:'Steps (millions)', color:'#a1a1aa', font:{size:12,family:'Inter'} }, grid:GRID, ticks:TICK }, y: { title:{ display:true, text:'Mean Episode Length (steps)', color:'#a1a1aa', font:{size:12,family:'Inter'} }, grid:GRID, ticks:TICK } } }
 });
 
 // ---- Eval stacked bar ----
 new Chart(document.getElementById('chartEval'), {
   type: 'bar',
   data: {
-    labels: ['Stage 1 — Easy', 'Stage 2 — Medium', 'Stage 3 — Hard', 'Stage 4 — Expert'],
+    labels: ['S1 — Easy', 'S2 — Medium', 'S3 — Hard', 'S4 — Expert'],
     datasets: [
-      { label: 'Clean Win',      data: [50, 6, 0, 0],  backgroundColor: '#3aaa65' },
-      { label: 'Truncated Win',  data: [0, 15, 20, 15], backgroundColor: '#8fd4a8' },
-      { label: 'Truncated Loss', data: [0, 29, 28, 30], backgroundColor: '#e8b87a' },
-      { label: 'Clean Loss',     data: [0, 0,  2,  5],  backgroundColor: '#e05c4a' },
+      { label: 'Clean Win',      data: [50, 6, 0, 0],  backgroundColor: '#10b981', borderRadius: 4 },
+      { label: 'Truncated Win',  data: [0, 15, 20, 15], backgroundColor: '#6ee7b7', borderRadius: 4 },
+      { label: 'Truncated Loss', data: [0, 29, 28, 30], backgroundColor: '#fcd34d', borderRadius: 4 },
+      { label: 'Clean Loss',     data: [0, 0,  2,  5],  backgroundColor: '#ef4444', borderRadius: 4 },
     ]
   },
   options: {
     ...baseOpts,
     scales: {
-      x: { stacked: true, grid: GRID, ticks: { ...TICK, font: { family: 'EB Garamond', size: 13 } } },
-      y: { stacked: true, max: 50, title:{ display:true, text:'Episodes (out of 50)', color:'#888', font:{size:12,family:'JetBrains Mono'} }, grid: GRID, ticks: TICK }
+      x: { stacked: true, grid: {display: false}, ticks: { ...TICK, font: { family: 'Inter', size: 13, weight: 500 } } },
+      y: { stacked: true, max: 50, title:{ display:true, text:'Episodes (out of 50)', color:'#a1a1aa', font:{size:12,family:'Inter'} }, grid: GRID, ticks: TICK }
     },
-    plugins: { legend: { position: 'top', labels: { font: { family: 'EB Garamond', size: 13 }, color: '#1a1a1a', boxWidth: 14 } }, tooltip: baseOpts.plugins.tooltip }
+    plugins: { legend: { position: 'top', labels: { font: { family: 'Inter', size: 13, weight: 500 }, color: '#27272a', boxWidth: 12, usePointStyle: true } }, tooltip: baseOpts.plugins.tooltip }
   }
 });
 </script>

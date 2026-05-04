@@ -1,4 +1,6 @@
-# Monopolia
+
+
+# <img src="docs/monopolia_logo.png" width="20%" /> Monopolia
 
 A complete Monopoly game engine written in Python with a Pygame renderer and full support for the official ruleset — including trading.
 
@@ -62,4 +64,4 @@ An RL agent trained via curriculum learning (MaskablePPO, four difficulty stages
 
 For the full training methodology, results, and failure mode analysis from the v1 run, see the research paper:
 
-**[→ Monopolia: Training a Curriculum RL Agent on a Complete Monopoly Engine](./monopolia_research_paper.html)**
+**[→ Monopolia: Training a Curriculum RL Agent on a Complete Monopoly Engine](viksn0w.github.io/Monopolia)**
