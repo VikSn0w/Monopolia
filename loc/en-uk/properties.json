@@ -1,0 +1,114 @@
+[
+  {
+    "id": 0, "name": "Old Kent Road", "type": "street", "group": "Brown", "price": 60, "location": 1,
+    "rent": [2, 10, 30, 90, 160, 250], "mortgage": 30, "houseCost": 50, "hotelCost": 50
+  },
+  {
+    "id": 1, "name": "Whitechapel Road", "type": "street", "group": "Brown", "price": 60, "location": 3,
+    "rent": [4, 20, 60, 180, 320, 450], "mortgage": 30, "houseCost": 50, "hotelCost": 50
+  },
+  {
+    "id": 2, "name": "Kings Cross Station", "type": "railroad", "group": "Railroad", "price": 200, "location": 5,
+    "rent": [25, 50, 100, 200], "mortgage": 100
+  },
+  {
+    "id": 3, "name": "The Angel Islington", "type": "street", "group": "Light Blue", "price": 100, "location": 6,
+    "rent": [6, 30, 90, 270, 400, 550], "mortgage": 50, "houseCost": 50, "hotelCost": 50
+  },
+  {
+    "id": 4, "name": "Euston Road", "type": "street", "group": "Light Blue", "price": 100, "location": 8,
+    "rent": [6, 30, 90, 270, 400, 550], "mortgage": 50, "houseCost": 50, "hotelCost": 50
+  },
+  {
+    "id": 5, "name": "Pentonville Road", "type": "street", "group": "Light Blue", "price": 120, "location": 9,
+    "rent": [8, 40, 100, 300, 450, 600], "mortgage": 60, "houseCost": 50, "hotelCost": 50
+  },
+  {
+    "id": 6, "name": "Pall Mall", "type": "street", "group": "Pink", "price": 140, "location": 11,
+    "rent": [10, 50, 150, 450, 625, 750], "mortgage": 70, "houseCost": 100, "hotelCost": 100
+  },
+  {
+    "id": 7, "name": "Electric Company", "type": "utility", "group": "Utility", "price": 150, "location": 12,
+    "rentMultiplier": [4, 10], "mortgage": 75
+  },
+  {
+    "id": 8, "name": "Whitehall", "type": "street", "group": "Pink", "price": 140, "location": 13,
+    "rent": [10, 50, 150, 450, 625, 750], "mortgage": 70, "houseCost": 100, "hotelCost": 100
+  },
+  {
+    "id": 9, "name": "Northumberland Avenue", "type": "street", "group": "Pink", "price": 160, "location": 14,
+    "rent": [12, 60, 180, 500, 700, 900], "mortgage": 80, "houseCost": 100, "hotelCost": 100
+  },
+  {
+    "id": 10, "name": "Marylebone Station", "type": "railroad", "group": "Railroad", "price": 200, "location": 15,
+    "rent": [25, 50, 100, 200], "mortgage": 100
+  },
+  {
+    "id": 11, "name": "Bow Street", "type": "street", "group": "Orange", "price": 180, "location": 16,
+    "rent": [14, 70, 200, 550, 750, 950], "mortgage": 90, "houseCost": 100, "hotelCost": 100
+  },
+  {
+    "id": 12, "name": "Marlborough Street", "type": "street", "group": "Orange", "price": 180, "location": 18,
+    "rent": [14, 70, 200, 550, 750, 950], "mortgage": 90, "houseCost": 100, "hotelCost": 100
+  },
+  {
+    "id": 13, "name": "Vine Street", "type": "street", "group": "Orange", "price": 200, "location": 19,
+    "rent": [16, 80, 220, 600, 800, 1000], "mortgage": 100, "houseCost": 100, "hotelCost": 100
+  },
+  {
+    "id": 14, "name": "Strand", "type": "street", "group": "Red", "price": 220, "location": 21,
+    "rent": [18, 90, 250, 700, 875, 1050], "mortgage": 110, "houseCost": 150, "hotelCost": 150
+  },
+  {
+    "id": 15, "name": "Fleet Street", "type": "street", "group": "Red", "price": 220, "location": 23,
+    "rent": [18, 90, 250, 700, 875, 1050], "mortgage": 110, "houseCost": 150, "hotelCost": 150
+  },
+  {
+    "id": 16, "name": "Trafalgar Square", "type": "street", "group": "Red", "price": 240, "location": 24,
+    "rent": [20, 100, 300, 750, 925, 1100], "mortgage": 120, "houseCost": 150, "hotelCost": 150
+  },
+  {
+    "id": 17, "name": "Fenchurch St. Station", "type": "railroad", "group": "Railroad", "price": 200, "location": 25,
+    "rent": [25, 50, 100, 200], "mortgage": 100
+  },
+  {
+    "id": 18, "name": "Leicester Square", "type": "street", "group": "Yellow", "price": 260, "location": 26,
+    "rent": [22, 110, 330, 800, 975, 1150], "mortgage": 130, "houseCost": 150, "hotelCost": 150
+  },
+  {
+    "id": 19, "name": "Coventry Street", "type": "street", "group": "Yellow", "price": 260, "location": 27,
+    "rent": [22, 110, 330, 800, 975, 1150], "mortgage": 130, "houseCost": 150, "hotelCost": 150
+  },
+  {
+    "id": 20, "name": "Water Works", "type": "utility", "group": "Utility", "price": 150, "location": 28,
+    "rentMultiplier": [4, 10], "mortgage": 75
+  },
+  {
+    "id": 21, "name": "Piccadilly", "type": "street", "group": "Yellow", "price": 280, "location": 29,
+    "rent": [24, 120, 360, 850, 1025, 1200], "mortgage": 140, "houseCost": 150, "hotelCost": 150
+  },
+  {
+    "id": 22, "name": "Regent Street", "type": "street", "group": "Green", "price": 300, "location": 31,
+    "rent": [26, 130, 390, 900, 1100, 1275], "mortgage": 150, "houseCost": 200, "hotelCost": 200
+  },
+  {
+    "id": 23, "name": "Oxford Street", "type": "street", "group": "Green", "price": 300, "location": 32,
+    "rent": [26, 130, 390, 900, 1100, 1275], "mortgage": 150, "houseCost": 200, "hotelCost": 200
+  },
+  {
+    "id": 24, "name": "Bond Street", "type": "street", "group": "Green", "price": 320, "location": 34,
+    "rent": [28, 150, 450, 1000, 1200, 1400], "mortgage": 160, "houseCost": 200, "hotelCost": 200
+  },
+  {
+    "id": 25, "name": "Liverpool St. Station", "type": "railroad", "group": "Railroad", "price": 200, "location": 35,
+    "rent": [25, 50, 100, 200], "mortgage": 100
+  },
+  {
+    "id": 26, "name": "Park Lane", "type": "street", "group": "Dark Blue", "price": 350, "location": 37,
+    "rent": [35, 175, 500, 1100, 1300, 1500], "mortgage": 175, "houseCost": 200, "hotelCost": 200
+  },
+  {
+    "id": 27, "name": "Mayfair", "type": "street", "group": "Dark Blue", "price": 400, "location": 39,
+    "rent": [50, 200, 600, 1400, 1700, 2000], "mortgage": 200, "houseCost": 200, "hotelCost": 200
+  }
+]

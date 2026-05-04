@@ -1,0 +1,9 @@
+.venv
+/.venv
+/evaluate_rl.py
+/models/
+/logs/
+/train_rl.py
+/logic/MonopolyEnv.py
+/logic/RLBot.py
+/.idea/

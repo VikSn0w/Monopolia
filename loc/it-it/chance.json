@@ -1,0 +1,66 @@
+[
+  {
+    "id": 0,
+    "description": "Andate fino al Parco della Vittoria."
+  },
+  {
+    "id": 1,
+    "description": "Andate avanti fino al Via! (Ritirate $200)."
+  },
+  {
+    "id": 2,
+    "description": "Andate fino a Viale Traiano. Se passate dal Via!, ritirate $200."
+  },
+  {
+    "id": 3,
+    "description": "Andate fino a Viale Vesuvio. Se passate dal Via!, ritirate $200."
+  },
+  {
+    "id": 4,
+    "description": "Andate alla Stazione più vicina. Se è libera, potete acquistarla dalla Banca. Se è di proprietà, pagate al proprietario il doppio dell'affitto a cui avrebbe normalmente diritto."
+  },
+  {
+    "id": 5,
+    "description": "Andate alla Stazione più vicina. Se è libera, potete acquistarla dalla Banca. Se è di proprietà, pagate al proprietario il doppio dell'affitto a cui avrebbe normalmente diritto."
+  },
+  {
+    "id": 6,
+    "description": "Andate alla Società (Elettrica o Acqua Potabile) più vicina. Se è libera, potete acquistarla dalla Banca. Se è di proprietà, tirate i dadi e pagate al proprietario un totale di 10 volte l'importo ottenuto."
+  },
+  {
+    "id": 7,
+    "description": "La Banca vi paga un dividendo di $50."
+  },
+  {
+    "id": 8,
+    "description": "Uscite gratis di prigione."
+  },
+  {
+    "id": 9,
+    "description": "Indietreggiate di 3 caselle."
+  },
+  {
+    "id": 10,
+    "description": "Andate in Prigione. Andateci direttamente, senza passare dal Via! e senza ritirare $200."
+  },
+  {
+    "id": 11,
+    "description": "Fate lavori di manutenzione su tutti i vostri stabili. Pagate $25 per ogni casa. Pagate $100 per ogni albergo."
+  },
+  {
+    "id": 12,
+    "description": "Multa per eccesso di velocità di $15."
+  },
+  {
+    "id": 13,
+    "description": "Fate un viaggio fino alla Stazione Sud. Se passate dal Via!, ritirate $200."
+  },
+  {
+    "id": 14,
+    "description": "Siete stati eletti Presidente del Consiglio di Amministrazione. Pagate $50 a ogni giocatore."
+  },
+  {
+    "id": 15,
+    "description": "Maturano le cedole del vostro prestito edilizio. Ritirate $150."
+  }
+]

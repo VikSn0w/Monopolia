@@ -1,0 +1,14 @@
+[
+  { "location": 0, "name": "Go", "type": "go" },
+  { "location": 2, "name": "Community Chest", "type": "community_chest" },
+  { "location": 4, "name": "Income Tax", "type": "tax", "amount": 200 },
+  { "location": 7, "name": "Chance", "type": "chance" },
+  { "location": 10, "name": "Jail", "type": "jail" },
+  { "location": 17, "name": "Community Chest", "type": "community_chest" },
+  { "location": 20, "name": "Free Parking", "type": "free_parking" },
+  { "location": 22, "name": "Chance", "type": "chance" },
+  { "location": 30, "name": "Go To Jail", "type": "go_to_jail" },
+  { "location": 33, "name": "Community Chest", "type": "community_chest" },
+  { "location": 36, "name": "Chance", "type": "chance" },
+  { "location": 38, "name": "Super Tax", "type": "tax", "amount": 100 }
+]

@@ -1,0 +1,14 @@
+[
+  { "location": 0, "name": "Via!", "type": "go" },
+  { "location": 2, "name": "Probabilità", "type": "community_chest" },
+  { "location": 4, "name": "Tassa Patrimoniale", "type": "tax", "amount": 200 },
+  { "location": 7, "name": "Imprevisti", "type": "chance" },
+  { "location": 10, "name": "Prigione", "type": "jail" },
+  { "location": 17, "name": "Probabilità", "type": "community_chest" },
+  { "location": 20, "name": "Parcheggio Gratuito", "type": "free_parking" },
+  { "location": 22, "name": "Imprevisti", "type": "chance" },
+  { "location": 30, "name": "In Prigione!", "type": "go_to_jail" },
+  { "location": 33, "name": "Probabilità", "type": "community_chest" },
+  { "location": 36, "name": "Imprevisti", "type": "chance" },
+  { "location": 38, "name": "Tassa di Lusso", "type": "tax", "amount": 100 }
+]
